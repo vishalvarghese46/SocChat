@@ -37,3 +37,20 @@ while True:
         message = message.encode('utf-8')
         message_header = f"{len(message):<{HEADER_LENGTH}}".encode('utf-8')
         client_socket.send(message_header + message)
+        if not len(username_header):
+                print('Connection closed by the server')
+                sys.exit()
+
+            # Convert header to int value
+            username_length = int(username_header.decode('utf-8').strip())
+
+            # Receive and decode username
+            username = client_socket.recv(username_length).decode('utf-8')
+
+            # Now do the same for message (as we received username, we received whole message, there's no need to check if it has any length)
+            message_header = client_socket.recv(HEADER_LENGTH)
+            message_length = int(message_header.decode('utf-8').strip())
+            message = client_socket.recv(message_length).decode('utf-8')
+
+            # Print message
+            print(f'{username} > {message}')
