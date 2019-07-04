@@ -138,3 +138,15 @@ while True:
 
         # Remove from our list of users
         del clients[notified_socket]
+
+'''
+   # It's not really necessary to have this, but will handle some socket exceptions just in case
+    for notified_socket in exception_sockets:
+
+        # Remove from list for socket.socket()
+        sockets_list.remove(notified_socket)
+
+        # Remove from our list of users
+        del clients[notified_socket]
+
+'''
